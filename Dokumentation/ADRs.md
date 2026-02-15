@@ -22,11 +22,11 @@ Es soll eine einfache, lokal laufende Windows-Desktop-Anwendung zur Verwaltung v
 
 
 
-\## Entscheidungen
+\# Entscheidungen
 
 
 
-\### 1. UI-Technologie
+\## 1. UI-Technologie
 
 \*\*WinForms (.NET 8)\*\*  
 
@@ -50,7 +50,7 @@ Ziel: Klare Trennung von UI, Domäne und Datenzugriff.
 
 
 
-\### 3. Datenbank
+\## 3. Datenbank
 
 \*\*SQLite + Entity Framework Core\*\*
 
@@ -66,7 +66,7 @@ Ziel: Klare Trennung von UI, Domäne und Datenzugriff.
 
 
 
-\### 4. Authentifizierung (MVP)
+\## 4. Authentifizierung (MVP)
 
 Kein echtes Login.  
 
@@ -74,7 +74,7 @@ Zwei vordefinierte Benutzer (Projektleiter / Projektmanager) werden per Seed erz
 
 
 
-\### 5. Berechtigungsmodell
+\## 5. Berechtigungsmodell
 
 \- Projekt erstellen → nur Projektleiter
 
@@ -88,7 +88,7 @@ Zwei vordefinierte Benutzer (Projektleiter / Projektmanager) werden per Seed erz
 
 
 
-\### 6. Datenhaltung
+\## 6. Datenhaltung
 
 \- Normalisierte Tabellenstruktur
 
@@ -100,7 +100,7 @@ Zwei vordefinierte Benutzer (Projektleiter / Projektmanager) werden per Seed erz
 
 
 
-\### 7. Versionsverwaltung
+\## 7. Versionsverwaltung
 
 \- Git-Repository direkt aus Visual Studio
 
