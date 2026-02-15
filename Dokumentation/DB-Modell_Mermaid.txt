@@ -1,0 +1,57 @@
+// Hier einfügen:
+https://mermaid.live/edit#pako:eNq1VFFvmzAQ_iuWpUqbRCNIICRIfchIOrE2JGLkZcqLB1fiDWxkjNQszX-fIZBBFGmRuvnJPn_fd3e-8x1wxGPADgYxpyQRJNsypNbm6yJAh9O-WpRJ5MVo_fTHVEhBWYLmtMhTsvdJBn14wNPGctyy02YdrL4s3PA24b5iY3TLQvIMxNVLj1FJSTqHIhI0l5Szvp-14D8gks9A4k0BQrl97LiNiQRJM0CuALWNZ7LPbsyf9ifuRWqe_7gKlrPQW_l_Sa8TyUUETRohvMp3htUjbvL4RERbzMo0Jd9VYXBfpcG0KleQ50zd1XK58MMbsvTYCxcZqQrx3zLtFSCcff4nYZHkiviz5z-9S726Dfc5qMc1HryMJKCh4cOcR2UGTHYr0sSxEelFHHd3KIC0Fi92NC86n_Xt7f6eH85fzFFeOv2OPgRQqUbyY-uoRTbEbgNXZJcUEYnP5e9eN4y2EW5Dt_W5HV0_-AUcazgRNMaOFCVoWE2CjFRHXBdmi-UO1GDAFSsm4mdFOSpOTtg3zrOWJniZ7LDzQtJCncq695vxd7YKYDEIl5dMYscYGbUIdg74VR1NfaBPbMMaGZY1NifDoYb32LHNgT3WTXNkK9vYtMZHDf-q3eoD2zIMY6rb1sg0JtPp5PgbWuib_w
+
+erDiagram
+    USER {
+        int Id PK
+        string DisplayName
+        int Role
+    }
+
+    PROJECT {
+        int Id PK
+        string Name
+        string CustomerName
+        string InitialDescription
+        int ProjectLeadUserId FK
+        datetime CreatedAt
+        int CreatedByUserId
+    }
+
+    INFORMATION {
+        int Id PK
+        int ProjectId FK
+        string Text
+        datetime CreatedAt
+        int CreatedByUserId
+        datetime UpdatedAt "nullable"
+        int UpdatedByUserId "nullable"
+    }
+
+    COMMENT {
+        int Id PK
+        int InformationId FK
+        string Text
+        datetime CreatedAt
+        int CreatedByUserId
+    }
+
+    INFOTAG {
+        int Id PK
+        int InformationId FK
+        string Tag
+    }
+
+    INFOLINK {
+        int Id PK
+        int InformationId FK
+        int Type "1=Image, 2=Document"
+        string Url
+    }
+
+    %% Relationships
+    USER ||--o{ PROJECT : "ProjectLead (Restrict)"
+    PROJECT ||--o{ INFORMATION : "Cascade"
+    INFORMATION ||--o{ COMMENT : "Cascade"
+    INFORMATION ||--o{ INFOTAG : "Cascade"
+    INFORMATION ||--o{ INFOLINK : "Cascade"
