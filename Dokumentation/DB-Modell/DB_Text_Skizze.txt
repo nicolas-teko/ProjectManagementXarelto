@@ -1,0 +1,54 @@
+// erster Entwurf DB-Modell
+
+User
+- Id (PK)
+- DisplayName
+- Role                      (enum: 1=ProjectLead, 2=ProjectManager)
+
+
+Project
+- Id (PK)
+- Name
+- CustomerName
+- InitialDescription
+- ProjectLeadUserId (FK -> User.Id)
+- CreatedAt
+- CreatedByUserId           (int, aktuell ohne FK-Konfig)
+1 User (ProjectLead)  ----<  viele Projects
+
+
+Information
+- Id (PK)
+- ProjectId (FK -> Project.Id)
+- Text
+- CreatedAt
+- CreatedByUserId           (int)
+- UpdatedAt                 (nullable)
+- UpdatedByUserId           (nullable)
+1 Project ----< viele Informations
+
+
+Comment
+- Id (PK)
+- InformationId (FK -> Information.Id)
+- Text
+- CreatedAt
+- CreatedByUserId           (int)
+1 Information ----< viele Comments
+
+
+InfoTag
+- Id (PK)
+- InformationId (FK -> Information.Id)
+- Tag                      (string)
+(Unique Index: InformationId + Tag)
+1 Information ----< viele InfoTags   (max. 3 im Code, nicht DB)
+
+
+InfoLink
+- Id (PK)
+- InformationId (FK -> Information.Id)
+- Type                     (enum: 1=Image, 2=Document)
+- Url
+1 Information ----< viele InfoLinks
+
