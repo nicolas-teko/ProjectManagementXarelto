@@ -29,6 +29,7 @@ namespace ProjectManagementXarelto.App
             SessionContext.CurrentUser = user;                  // Speichere den Benutzer als aktuell eingeloggten User
 
             OpenProjectsForm();                                 // Öffne das nächste Fenster (Projektübersicht) und verstecke die Login-Form
+        }
 
         private void OpenProjectsForm() {
             var form = new ProjectsForm();  // Neues Fenster erzeugen
@@ -37,5 +38,5 @@ namespace ProjectManagementXarelto.App
         }
 
     }
-    }
+
 }

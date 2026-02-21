@@ -50,7 +50,13 @@ namespace ProjectManagementXarelto.App {
         }
 
         private void BtnNewProject_Click(object? sender, EventArgs e) {
-            MessageBox.Show("Hier später: Neues Projekt erstellen."); // Platzhalter für Create-Form
+            // Erklärung: Formular zum Erstellen eines neuen Projekts öffnen
+            using var form = new ProjectCreateForm();
+
+            // Erklärung: Wenn der Dialog mit OK beendet wird, Projekte neu laden
+            if (form.ShowDialog(this) == DialogResult.OK) {
+                LoadProjects();                                // Erklärung: DataGridView nach dem Speichern aktualisieren
+            }
         }
     } 
 }
