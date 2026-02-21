@@ -23,7 +23,7 @@ namespace ProjectManagementXarelto.App {
             }
 
             // Erklärung: Projektleiter ist der aktuell eingeloggte Benutzer
-            lblProjectLead.Text = $"Projektleiter: {user.DisplayName}";
+            lblProjectLead.Text = $"{user.DisplayName}";
         }
 
         private void BtnSave_Click(object? sender, EventArgs e) {
