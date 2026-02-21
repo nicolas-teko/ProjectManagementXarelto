@@ -20,7 +20,7 @@ namespace ProjectManagementXarelto.App
             DbContext.Database.Migrate();
             DbSeeder.SeedUsers(DbContext);
 
-            Application.Run(new Form1());
+            Application.Run(new LoginForm());
         }
     }
 }
