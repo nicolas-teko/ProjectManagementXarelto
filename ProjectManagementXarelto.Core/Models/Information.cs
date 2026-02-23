@@ -22,5 +22,10 @@ namespace ProjectManagementXarelto.Core.Models {
         public ICollection<Comment> Comments { get; set; } = new List<Comment>();
         public ICollection<InfoTag> Tags { get; set; } = new List<InfoTag>();
         public ICollection<InfoLink> Links { get; set; } = new List<InfoLink>();
+
+        public override string ToString() {
+            // Erklärung: Text, wie die Information in Listen angezeigt wird
+            return $"{CreatedAt:yyyy-MM-dd HH:mm} - {Text}";
+        }
     }
 }

@@ -9,6 +9,7 @@ namespace ProjectManagementXarelto.App {
              
             this.Load += ProjectsForm_Load;                          // Event ausführen, wenn das Form geladen wird
             btnNewProject.Click += BtnNewProject_Click;              // Klick-Event für "Neues Projekt"-Button
+            dgvProjects.CellDoubleClick += DgvProjects_CellDoubleClick; // Erklärung: Doppelklick auf Projekt-Zeile
         }
 
         private void ProjectsForm_Load(object? sender, EventArgs e) {
@@ -58,5 +59,23 @@ namespace ProjectManagementXarelto.App {
                 LoadProjects();                                // Erklärung: DataGridView nach dem Speichern aktualisieren
             }
         }
-    } 
+
+        private void DgvProjects_CellDoubleClick(object? sender, DataGridViewCellEventArgs e) {
+            if (e.RowIndex < 0)
+                return; // Erklärung: Header-Zeile ignorieren
+
+            // Erklärung: Zeile holen, auf die doppelt geklickt wurde
+            var row = dgvProjects.Rows[e.RowIndex];
+
+            // Erklärung: Projekt-Id aus der Spalte "Id" lesen
+            if (row.Cells["Id"].Value is int projectId) {
+                using var form = new ProjectDetailsForm(projectId); // Erklärung: Detail-Form für dieses Projekt erzeugen
+                form.ShowDialog(this);                              // Erklärung: Modal anzeigen
+
+                LoadProjects(); // Erklärung: Nach dem Schließen Projekte neu laden (falls sich etwas geändert hat)
+            }
+        }
+
+    }
+   
 }
