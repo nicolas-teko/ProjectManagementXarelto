@@ -4,16 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectManagementXarelto.Core.Models {
-    public class Comment {
-        public int Id { get; set; }
+namespace ProjectManagementXarelto.Core.Models;
 
-        public int InformationId { get; set; }
-        public Information? Information { get; set; }
+public class Comment {
+    public int Id { get; set; }
 
-        public string Text { get; set; } = string.Empty;
+    public int InformationId { get; set; }
+    public Information? Information { get; set; }
 
-        public DateTime CreatedAt { get; set; }
-        public int CreatedByUserId { get; set; }
-    }
+    public string Text { get; set; } = string.Empty;
+
+    public DateTime CreatedAt { get; set; }
+    public int CreatedByUserId { get; set; }
+
+    public override string ToString()
+        => $"{CreatedAt:yyyy-MM-dd HH:mm} - {Text}";
 }

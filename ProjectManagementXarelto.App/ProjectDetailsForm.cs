@@ -16,6 +16,10 @@ namespace ProjectManagementXarelto.App {
 
             lstInformations.DoubleClick += LstInformations_DoubleClick; // Erklärung: Doppelklick-Ereignis für Liste
 
+            btnApplyTagFilter.Click += BtnApplyTagFilter_Click;   // Erklärung: Filter anwenden
+            
+            btnClearTagFilter.Click += BtnClearTagFilter_Click;   // Erklärung: Filter löschen
+
         }
 
         private void ProjectDetailsForm_Load(object? sender, EventArgs e) {
@@ -41,29 +45,29 @@ namespace ProjectManagementXarelto.App {
             LoadInformations(); // Erklärung: Liste der Informations-Elemente füllen
         }
 
-        private void LoadInformations() {                         
-            // Warum darf diese Methode darf KEINEN Parameter mehr haben? 
-            //Antwort: Weil die Methode immer die Informationen für das aktuell angezeigte Projekt laden soll, und die Projekt-Id bereits als Feld (_projectId) in der Klasse gespeichert ist
-            var infos = Program.DbContext.Informations
-                .Where(i => i.ProjectId == _projectId)
+        private void LoadInformations(string? tagFilter = null) {
+            var query = Program.DbContext.Informations
+                .Where(i => i.ProjectId == _projectId);
+
+            // Filter anwenden, falls vorhanden
+            if (!string.IsNullOrWhiteSpace(tagFilter)) {
+                var filter = tagFilter.Trim().ToLower();
+                query = query.Where(i => i.Tags.Any(t => t.Tag.ToLower().Contains(filter)));
+            }
+
+            var infos = query
                 .OrderBy(i => i.CreatedAt)
                 .ToList();
 
-            lstInformations.Items.Clear(); // Erklärung: Liste leeren
+            lstInformations.Items.Clear();
 
-            foreach (var info in infos) {
-                // Erklärung: Einfache Anzeigezeile pro Information erzeugen
-                var displayText = $"{info.CreatedAt:yyyy-MM-dd HH:mm} - {info.Text}";
-                lstInformations.Items.Add(displayText);
-            }
-
-            // Erklärung: Falls keine Informationen vorhanden sind, Hinweis anzeigen
             if (!infos.Any()) {
-                lstInformations.Items.Add("(Noch keine Informationen vorhanden)");
+                lstInformations.Items.Add("(Keine Informationen vorhanden)");
+                return;
             }
 
             foreach (var info in infos) {
-                lstInformations.Items.Add(info); // Erklärung: Information-Objekte direkt hinzufügen (ToString wird genutzt)
+                lstInformations.Items.Add(info);  // ToString() zeigt Text + Datum
             }
         }
 
@@ -92,6 +96,17 @@ namespace ProjectManagementXarelto.App {
             if (form.ShowDialog(this) == DialogResult.OK) {
                 LoadInformations();                                                      // Erklärung: DataGridView nach dem Speichern aktualisieren
             }
+        }
+        private void BtnApplyTagFilter_Click(object? sender, EventArgs e) {
+            // Erklärung: Filter-Text auslesen und Liste damit neu laden
+            var filter = txtTagFilter.Text;
+            LoadInformations(filter);
+        }
+
+        private void BtnClearTagFilter_Click(object? sender, EventArgs e) {
+            // Erklärung: Filter zurücksetzen und alle Infos anzeigen
+            txtTagFilter.Clear();
+            LoadInformations();
         }
     }
 }

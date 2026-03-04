@@ -20,21 +20,26 @@ namespace ProjectManagementXarelto.App {
 
             btnAddLink.Click += BtnAddLink_Click;       // Erklärung: Neuen Link hinzufügen
             btnRemoveLink.Click += BtnRemoveLink_Click; // Erklärung: Link entfernen
+
+            btnAddComment.Click += BtnAddComment_Click; // Erklärung: Klick auf "Kommentar hinzufügen"
         }
 
         private void InformationEditForm_Load(object? sender, EventArgs e) {
             // Erklärung: Information inkl. Tags und Links aus DB laden
             _info = Program.DbContext.Informations
                 .Where(i => i.Id == _informationId)
-                .Select(i => new {
+                .Select(i => new 
+                {
                     Info = i,
                     Tags = i.Tags.ToList(),
-                    Links = i.Links.ToList()
+                    Links = i.Links.ToList(),
+                    Comments = i.Comments.ToList()
                 })
                 .AsEnumerable()  // Erklärung: danach im Speicher weiterarbeiten
                 .Select(x => {
                     x.Info.Tags = x.Tags;
                     x.Info.Links = x.Links;
+                    x.Info.Comments = x.Comments;
                     return x.Info;
                 })
                 .FirstOrDefault();
@@ -44,6 +49,8 @@ namespace ProjectManagementXarelto.App {
                 DialogResult = DialogResult.Cancel;
                 Close();
                 return;
+
+
             }
 
             txtInfoText.Text = _info.Text; // Erklärung: bestehenden Text anzeigen
@@ -56,6 +63,7 @@ namespace ProjectManagementXarelto.App {
 
             RefreshTagsList();  // Erklärung: Tag-Liste füllen
             RefreshLinksList(); // Erklärung: Link-Liste füllen
+            RefreshCommentsList(); // Erklärung: Kommentare füllen
 
             // Erklärung: ComboBox für Link-Typ initialisieren
             cmbLinkType.Items.Clear();
@@ -202,6 +210,42 @@ namespace ProjectManagementXarelto.App {
         private void BtnCancel_Click(object? sender, EventArgs e) {
             DialogResult = DialogResult.Cancel; // Erklärung: ohne Speichern schließen
             Close();
+        }
+
+        private void RefreshCommentsList() {
+            lstComments.Items.Clear(); // Erklärung: Liste leeren
+            if (_info == null) return;
+
+            foreach (var c in _info.Comments.OrderBy(c => c.CreatedAt)) {
+                lstComments.Items.Add(c); // Erklärung: Comment-Objekte, ToString() zeigt Datum + Text
+            }
+
+            if (!_info.Comments.Any()) {
+                lstComments.Items.Add("(keine Kommentare)");
+            }
+        }
+        private void BtnAddComment_Click(object? sender, EventArgs e) {
+            if (_info == null) return;
+            var user = SessionContext.CurrentUser; // Erklärung: aktuell eingeloggter Benutzer
+            if (user == null) {
+                MessageBox.Show("Kein Benutzer angemeldet.");
+                return;
+            }
+            var text = txtNewComment.Text.Trim(); // Erklärung: neuen Kommentar-Text holen
+            if (string.IsNullOrWhiteSpace(text)) {
+                MessageBox.Show("Kommentar darf nicht leer sein.");
+                return;
+            }
+            var comment = new Comment {
+                InformationId = _info.Id,
+                Text = text,
+                CreatedAt = DateTime.UtcNow,
+                CreatedByUserId = user.Id
+            };
+            _info.Comments.Add(comment);                     // Erklärung: Kommentar in Navigation hinzufügen
+            Program.DbContext.Comments.Add(comment);     // Erklärung: Kommentar in DbContext registrieren
+            txtNewComment.Clear();                         // Erklärung: Eingabefeld leeren
+            RefreshCommentsList();                        // Erklärung: Liste aktualisieren
         }
     }
 }

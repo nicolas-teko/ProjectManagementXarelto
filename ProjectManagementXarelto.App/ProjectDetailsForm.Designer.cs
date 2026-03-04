@@ -31,6 +31,10 @@
             lblDetailsInformationen = new Label();
             lblDetailsDescription = new Label();
             btnNewInformation = new Button();
+            lblTagFilter = new Label();
+            txtTagFilter = new TextBox();
+            btnApplyTagFilter = new Button();
+            btnClearTagFilter = new Button();
             SuspendLayout();
             // 
             // lblProjectName
@@ -73,16 +77,17 @@
             // 
             // lstInformations
             // 
+            lstInformations.AccessibleName = "";
             lstInformations.FormattingEnabled = true;
-            lstInformations.Location = new Point(87, 285);
+            lstInformations.Location = new Point(87, 305);
             lstInformations.Name = "lstInformations";
-            lstInformations.Size = new Size(604, 104);
+            lstInformations.Size = new Size(604, 84);
             lstInformations.TabIndex = 4;
             // 
             // lblDetailsInformationen
             // 
             lblDetailsInformationen.AutoSize = true;
-            lblDetailsInformationen.Location = new Point(86, 262);
+            lblDetailsInformationen.Location = new Point(86, 273);
             lblDetailsInformationen.Name = "lblDetailsInformationen";
             lblDetailsInformationen.Size = new Size(106, 20);
             lblDetailsInformationen.TabIndex = 5;
@@ -106,11 +111,49 @@
             btnNewInformation.Text = "+ Neue Information";
             btnNewInformation.UseVisualStyleBackColor = true;
             // 
+            // lblTagFilter
+            // 
+            lblTagFilter.AutoSize = true;
+            lblTagFilter.Location = new Point(383, 273);
+            lblTagFilter.Name = "lblTagFilter";
+            lblTagFilter.Size = new Size(78, 20);
+            lblTagFilter.TabIndex = 8;
+            lblTagFilter.Text = "Tag Suche:";
+            // 
+            // txtTagFilter
+            // 
+            txtTagFilter.Location = new Point(467, 270);
+            txtTagFilter.Name = "txtTagFilter";
+            txtTagFilter.Size = new Size(149, 27);
+            txtTagFilter.TabIndex = 9;
+            // 
+            // btnApplyTagFilter
+            // 
+            btnApplyTagFilter.Location = new Point(622, 270);
+            btnApplyTagFilter.Name = "btnApplyTagFilter";
+            btnApplyTagFilter.Size = new Size(32, 27);
+            btnApplyTagFilter.TabIndex = 10;
+            btnApplyTagFilter.Text = "A";
+            btnApplyTagFilter.UseVisualStyleBackColor = true;
+            // 
+            // btnClearTagFilter
+            // 
+            btnClearTagFilter.Location = new Point(659, 270);
+            btnClearTagFilter.Name = "btnClearTagFilter";
+            btnClearTagFilter.Size = new Size(32, 27);
+            btnClearTagFilter.TabIndex = 11;
+            btnClearTagFilter.Text = "D";
+            btnClearTagFilter.UseVisualStyleBackColor = true;
+            // 
             // ProjectDetailsForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnClearTagFilter);
+            Controls.Add(btnApplyTagFilter);
+            Controls.Add(txtTagFilter);
+            Controls.Add(lblTagFilter);
             Controls.Add(btnNewInformation);
             Controls.Add(lblDetailsDescription);
             Controls.Add(lblDetailsInformationen);
@@ -135,5 +178,9 @@
         private Label lblDetailsInformationen;
         private Label lblDetailsDescription;
         private Button btnNewInformation;
+        private Label lblTagFilter;
+        private TextBox txtTagFilter;
+        private Button btnApplyTagFilter;
+        private Button btnClearTagFilter;
     }
 }
