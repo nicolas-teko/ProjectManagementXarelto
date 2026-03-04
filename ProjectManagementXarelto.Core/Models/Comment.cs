@@ -18,5 +18,5 @@ public class Comment {
     public int CreatedByUserId { get; set; }
 
     public override string ToString()
-        => $"{CreatedAt:yyyy-MM-dd HH:mm} - {Text}";
+        => $"{Text} - ({CreatedAt:yyyy-MM-dd HH:mm})";
 }

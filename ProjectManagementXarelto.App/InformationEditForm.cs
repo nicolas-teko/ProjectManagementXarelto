@@ -22,6 +22,8 @@ namespace ProjectManagementXarelto.App {
             btnRemoveLink.Click += BtnRemoveLink_Click; // Erklärung: Link entfernen
 
             btnAddComment.Click += BtnAddComment_Click; // Erklärung: Klick auf "Kommentar hinzufügen"
+
+            lstLinks.DoubleClick += LstLinks_DoubleClick;   // Inormation Öffnet Link im Browser
         }
 
         private void InformationEditForm_Load(object? sender, EventArgs e) {
@@ -81,7 +83,7 @@ namespace ProjectManagementXarelto.App {
             }
 
             if (!_info.Tags.Any()) {
-                lstTags.Items.Add("(keine Tags)");
+                lstTags.Items.Add("(noch keine Tags)");
             }
         }
 
@@ -94,7 +96,7 @@ namespace ProjectManagementXarelto.App {
             }
 
             if (!_info.Links.Any()) {
-                lstLinks.Items.Add("(keine Links)");
+                lstLinks.Items.Add("(noch keine Links)");
             }
         }
 
@@ -221,7 +223,7 @@ namespace ProjectManagementXarelto.App {
             }
 
             if (!_info.Comments.Any()) {
-                lstComments.Items.Add("(keine Kommentare)");
+                lstComments.Items.Add("(noch keine Kommentare)");
             }
         }
         private void BtnAddComment_Click(object? sender, EventArgs e) {
@@ -246,6 +248,20 @@ namespace ProjectManagementXarelto.App {
             Program.DbContext.Comments.Add(comment);     // Erklärung: Kommentar in DbContext registrieren
             txtNewComment.Clear();                         // Erklärung: Eingabefeld leeren
             RefreshCommentsList();                        // Erklärung: Liste aktualisieren
+        }
+
+        private void LstLinks_DoubleClick(object? sender, EventArgs e) {
+            if (lstLinks.SelectedItem is not InfoLink link)
+                return; // Erklärung: Nur reagieren wenn ein Link ausgewählt ist
+
+            try {
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo {
+                    FileName = link.Url,   // Erklärung: URL öffnen
+                    UseShellExecute = true // Erklärung: Standardbrowser verwenden
+                });
+            } catch {
+                MessageBox.Show("Link konnte nicht geöffnet werden.");
+            }
         }
     }
 }

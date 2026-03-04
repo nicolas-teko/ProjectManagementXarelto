@@ -24,8 +24,13 @@ namespace ProjectManagementXarelto.Core.Models {
         public ICollection<InfoLink> Links { get; set; } = new List<InfoLink>();
 
         public override string ToString() {
+            //Tag noch hinzufügen
+            var tagText = Tags.Any()
+            ? $" [Tags: {string.Join(", ", Tags.Select(t => t.Tag))}]":
+            "";
+
             // Erklärung: Text, wie die Information in Listen angezeigt wird
-            return $"{CreatedAt:yyyy-MM-dd HH:mm} - {Text}";
+            return $"{Text} ({CreatedAt:yyyy-MM-dd HH:mm}){tagText}";
         }
     }
 }

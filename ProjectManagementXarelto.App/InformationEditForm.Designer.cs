@@ -50,13 +50,13 @@
             txtInfoText.Location = new Point(99, 42);
             txtInfoText.Multiline = true;
             txtInfoText.Name = "txtInfoText";
-            txtInfoText.Size = new Size(600, 76);
+            txtInfoText.Size = new Size(600, 65);
             txtInfoText.TabIndex = 0;
             // 
             // lblEditInformationText
             // 
             lblEditInformationText.AutoSize = true;
-            lblEditInformationText.Location = new Point(103, 19);
+            lblEditInformationText.Location = new Point(99, 19);
             lblEditInformationText.Name = "lblEditInformationText";
             lblEditInformationText.Size = new Size(90, 20);
             lblEditInformationText.TabIndex = 1;
@@ -65,7 +65,7 @@
             // lblMeta
             // 
             lblMeta.AutoSize = true;
-            lblMeta.Location = new Point(561, 19);
+            lblMeta.Location = new Point(320, 19);
             lblMeta.Name = "lblMeta";
             lblMeta.Size = new Size(50, 20);
             lblMeta.TabIndex = 2;
@@ -92,7 +92,7 @@
             // lstLinks
             // 
             lstLinks.FormattingEnabled = true;
-            lstLinks.Location = new Point(104, 267);
+            lstLinks.Location = new Point(99, 273);
             lstLinks.Name = "lstLinks";
             lstLinks.Size = new Size(280, 44);
             lstLinks.TabIndex = 11;
@@ -100,7 +100,7 @@
             // lstTags
             // 
             lstTags.FormattingEnabled = true;
-            lstTags.Location = new Point(420, 267);
+            lstTags.Location = new Point(420, 273);
             lstTags.Name = "lstTags";
             lstTags.Size = new Size(280, 44);
             lstTags.TabIndex = 12;
@@ -108,7 +108,7 @@
             // lblEditInfoURLs
             // 
             lblEditInfoURLs.AutoSize = true;
-            lblEditInfoURLs.Location = new Point(103, 244);
+            lblEditInfoURLs.Location = new Point(99, 250);
             lblEditInfoURLs.Name = "lblEditInfoURLs";
             lblEditInfoURLs.Size = new Size(161, 20);
             lblEditInfoURLs.TabIndex = 13;
@@ -117,7 +117,7 @@
             // lblEditInfoTags
             // 
             lblEditInfoTags.AutoSize = true;
-            lblEditInfoTags.Location = new Point(420, 244);
+            lblEditInfoTags.Location = new Point(420, 250);
             lblEditInfoTags.Name = "lblEditInfoTags";
             lblEditInfoTags.Size = new Size(41, 20);
             lblEditInfoTags.TabIndex = 14;
@@ -125,14 +125,14 @@
             // 
             // txtNewUrl
             // 
-            txtNewUrl.Location = new Point(104, 349);
+            txtNewUrl.Location = new Point(99, 355);
             txtNewUrl.Name = "txtNewUrl";
             txtNewUrl.Size = new Size(280, 27);
             txtNewUrl.TabIndex = 15;
             // 
             // txtNewTag
             // 
-            txtNewTag.Location = new Point(420, 317);
+            txtNewTag.Location = new Point(420, 323);
             txtNewTag.Name = "txtNewTag";
             txtNewTag.Size = new Size(280, 27);
             txtNewTag.TabIndex = 16;
@@ -140,14 +140,14 @@
             // cmbLinkType
             // 
             cmbLinkType.FormattingEnabled = true;
-            cmbLinkType.Location = new Point(104, 317);
+            cmbLinkType.Location = new Point(99, 323);
             cmbLinkType.Name = "cmbLinkType";
             cmbLinkType.Size = new Size(280, 28);
             cmbLinkType.TabIndex = 17;
             // 
             // btnAddLink
             // 
-            btnAddLink.Location = new Point(320, 382);
+            btnAddLink.Location = new Point(320, 388);
             btnAddLink.Name = "btnAddLink";
             btnAddLink.Size = new Size(29, 29);
             btnAddLink.TabIndex = 18;
@@ -156,7 +156,7 @@
             // 
             // btnRemoveLink
             // 
-            btnRemoveLink.Location = new Point(355, 382);
+            btnRemoveLink.Location = new Point(355, 388);
             btnRemoveLink.Name = "btnRemoveLink";
             btnRemoveLink.Size = new Size(29, 29);
             btnRemoveLink.TabIndex = 19;
@@ -165,7 +165,7 @@
             // 
             // btnAddTag
             // 
-            btnAddTag.Location = new Point(639, 349);
+            btnAddTag.Location = new Point(639, 355);
             btnAddTag.Name = "btnAddTag";
             btnAddTag.Size = new Size(31, 29);
             btnAddTag.TabIndex = 20;
@@ -175,7 +175,7 @@
             // btnRemoveTag
             // 
             btnRemoveTag.Font = new Font("Segoe UI", 9F);
-            btnRemoveTag.Location = new Point(676, 349);
+            btnRemoveTag.Location = new Point(676, 355);
             btnRemoveTag.Name = "btnRemoveTag";
             btnRemoveTag.Size = new Size(28, 29);
             btnRemoveTag.TabIndex = 21;
@@ -193,15 +193,14 @@
             // 
             // txtNewComment
             // 
-            txtNewComment.Location = new Point(104, 208);
+            txtNewComment.Location = new Point(99, 214);
             txtNewComment.Name = "txtNewComment";
             txtNewComment.Size = new Size(507, 27);
             txtNewComment.TabIndex = 24;
-            txtNewComment.Text = "Kommentar schreiben...";
             // 
             // btnAddComment
             // 
-            btnAddComment.Location = new Point(617, 208);
+            btnAddComment.Location = new Point(613, 214);
             btnAddComment.Name = "btnAddComment";
             btnAddComment.Size = new Size(82, 27);
             btnAddComment.TabIndex = 25;
@@ -211,7 +210,7 @@
             // lstComments
             // 
             lstComments.FormattingEnabled = true;
-            lstComments.Location = new Point(103, 144);
+            lstComments.Location = new Point(99, 144);
             lstComments.Name = "lstComments";
             lstComments.Size = new Size(596, 64);
             lstComments.TabIndex = 26;

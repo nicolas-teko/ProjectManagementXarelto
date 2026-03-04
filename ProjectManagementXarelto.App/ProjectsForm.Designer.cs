@@ -33,7 +33,7 @@
             // lblCurrentUser
             // 
             lblCurrentUser.AutoSize = true;
-            lblCurrentUser.Location = new Point(511, 9);
+            lblCurrentUser.Location = new Point(461, 9);
             lblCurrentUser.Name = "lblCurrentUser";
             lblCurrentUser.Size = new Size(116, 20);
             lblCurrentUser.TabIndex = 0;
@@ -50,7 +50,7 @@
             // 
             // btnNewProject
             // 
-            btnNewProject.Location = new Point(511, 411);
+            btnNewProject.Location = new Point(589, 411);
             btnNewProject.Name = "btnNewProject";
             btnNewProject.Size = new Size(139, 27);
             btnNewProject.TabIndex = 2;
@@ -61,7 +61,7 @@
             // 
             lblProjectOverview.AutoSize = true;
             lblProjectOverview.Font = new Font("Segoe UI", 13F);
-            lblProjectOverview.Location = new Point(59, 72);
+            lblProjectOverview.Location = new Point(58, 79);
             lblProjectOverview.Name = "lblProjectOverview";
             lblProjectOverview.Size = new Size(174, 30);
             lblProjectOverview.TabIndex = 3;

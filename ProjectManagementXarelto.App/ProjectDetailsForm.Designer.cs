@@ -79,6 +79,7 @@
             // 
             lstInformations.AccessibleName = "";
             lstInformations.FormattingEnabled = true;
+            lstInformations.HorizontalScrollbar = true;
             lstInformations.Location = new Point(87, 305);
             lstInformations.Name = "lstInformations";
             lstInformations.Size = new Size(604, 84);
@@ -114,7 +115,7 @@
             // lblTagFilter
             // 
             lblTagFilter.AutoSize = true;
-            lblTagFilter.Location = new Point(383, 273);
+            lblTagFilter.Location = new Point(343, 273);
             lblTagFilter.Name = "lblTagFilter";
             lblTagFilter.Size = new Size(78, 20);
             lblTagFilter.TabIndex = 8;
@@ -122,27 +123,27 @@
             // 
             // txtTagFilter
             // 
-            txtTagFilter.Location = new Point(467, 270);
+            txtTagFilter.Location = new Point(418, 270);
             txtTagFilter.Name = "txtTagFilter";
             txtTagFilter.Size = new Size(149, 27);
             txtTagFilter.TabIndex = 9;
             // 
             // btnApplyTagFilter
             // 
-            btnApplyTagFilter.Location = new Point(622, 270);
+            btnApplyTagFilter.Location = new Point(577, 270);
             btnApplyTagFilter.Name = "btnApplyTagFilter";
-            btnApplyTagFilter.Size = new Size(32, 27);
+            btnApplyTagFilter.Size = new Size(55, 27);
             btnApplyTagFilter.TabIndex = 10;
-            btnApplyTagFilter.Text = "A";
+            btnApplyTagFilter.Text = "Filter";
             btnApplyTagFilter.UseVisualStyleBackColor = true;
             // 
             // btnClearTagFilter
             // 
-            btnClearTagFilter.Location = new Point(659, 270);
+            btnClearTagFilter.Location = new Point(638, 270);
             btnClearTagFilter.Name = "btnClearTagFilter";
-            btnClearTagFilter.Size = new Size(32, 27);
+            btnClearTagFilter.Size = new Size(53, 27);
             btnClearTagFilter.TabIndex = 11;
-            btnClearTagFilter.Text = "D";
+            btnClearTagFilter.Text = "Clear";
             btnClearTagFilter.UseVisualStyleBackColor = true;
             // 
             // ProjectDetailsForm

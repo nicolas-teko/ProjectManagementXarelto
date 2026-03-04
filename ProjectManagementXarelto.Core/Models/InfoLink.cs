@@ -17,5 +17,9 @@ namespace ProjectManagementXarelto.Core.Models {
 
         public LinkType Type { get; set; }
         public string Url { get; set; } = string.Empty;
+
+        public override string ToString() {
+            return $"{Type}: {Url}";
+        }
     }
 }

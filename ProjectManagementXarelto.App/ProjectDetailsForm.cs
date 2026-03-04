@@ -47,6 +47,7 @@ namespace ProjectManagementXarelto.App {
 
         private void LoadInformations(string? tagFilter = null) {
             var query = Program.DbContext.Informations
+                .Include(i => i.Tags)   // Tag laden
                 .Where(i => i.ProjectId == _projectId);
 
             // Filter anwenden, falls vorhanden

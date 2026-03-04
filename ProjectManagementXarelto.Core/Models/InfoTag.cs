@@ -12,5 +12,10 @@ namespace ProjectManagementXarelto.Core.Models {
         public Information? Information { get; set; }
 
         public string Tag { get; set; } = string.Empty;
+
+        // Erklärung: Bestimmt, wie das Objekt in Listen (ListBox) angezeigt wird
+        public override string ToString() {
+            return Tag;
+        }
     }
 }

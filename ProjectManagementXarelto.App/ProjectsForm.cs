@@ -47,6 +47,13 @@ namespace ProjectManagementXarelto.App {
                 p.CreatedAt
             }).ToList();
 
+            dgvProjects.DataSource = viewData;
+            dgvProjects.Columns["Id"].Visible = false;   // ID-Spalte ausblenden
+
+            // Spalten passen sich an und füllen die Breite
+            dgvProjects.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvProjects.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+
             dgvProjects.DataSource = viewData;                       // DataGridView mit Projektdaten füllen
         }
 
