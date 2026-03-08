@@ -1,0 +1,80 @@
+classDiagram
+    class User {
+        +int Id
+        +string DisplayName
+        +RoleType Role
+    }
+
+
+    class Project {
+        +int Id
+        +string Name
+        +string CustomerName
+        +string InitialDescription
+        +int ProjectLeadUserId
+        +DateTime CreatedAt
+        +int CreatedByUserId
+    }
+
+    class Information {
+        +int Id
+        +int ProjectId
+        +string Text
+        +DateTime CreatedAt
+        +int CreatedByUserId
+        +DateTime? UpdatedAt
+        +int? UpdatedByUserId
+    }
+
+    class Comment {
+        +int Id
+        +int InformationId
+        +string Text
+        +DateTime CreatedAt
+        +int CreatedByUserId
+    }
+
+    class InfoTag {
+        +int Id
+        +int InformationId
+        +string Tag
+    }
+
+    class InfoLink {
+        +int Id
+        +int InformationId
+        +LinkType Type
+        +string Url
+    }
+
+    class LinkType {
+        <<enumeration>>
+        Image
+        Document
+    }
+
+    class AppDbContext {
+        +DbSet~User~ Users
+        +DbSet~Project~ Projects
+        +DbSet~Information~ Informations
+        +DbSet~Comment~ Comments
+        +DbSet~InfoTag~ InfoTags
+        +DbSet~InfoLink~ InfoLinks
+    }
+
+
+    
+    InfoLink --> LinkType
+
+    Project "1" --> "1" User : ProjectLeadUser
+    Project "1" --> "0..*" Information
+    Information "1" --> "0..*" Comment
+    Information "1" --> "0..*" InfoTag
+    Information "1" --> "0..*" InfoLink
+
+    AppDbContext ..> User
+    AppDbContext ..> Project
+    AppDbContext ..> Information
+    AppDbContext ..> Comment
+    AppDbContext ..> InfoTag
+    AppDbContext ..> InfoLink
