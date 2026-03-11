@@ -1,6 +1,6 @@
 # ProjectManagementXarelto
 
-Eine einfache Windows-Desktopanwendung zur Verwaltung von Projekten, Informationen, Tags und Kommentaren.  
+Eine einfache Windows-Desktopanwendung zur Verwaltung von Projekten, Informationen, Tags, URLs und Kommentaren.  
 Die Anwendung wurde mit **C# (.NET 8)** und **WinForms** entwickelt und nutzt **SQLite** als lokale Datenbank.
 
 ---
