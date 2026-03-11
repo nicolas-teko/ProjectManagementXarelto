@@ -1,0 +1,13 @@
+@startuml
+title State Machine Diagramm - Projekt
+
+[*] --> Kein_Projekt
+
+Kein_Projekt --> Projekt_erstellt : Erstellen durch\nProjektleiter
+Projekt_erstellt --> Projekt_mit_Information : Information hinzufügen
+Projekt_mit_Information --> Projekt_bearbeitet : Kommentar, URL oder Tag hinzufügen
+
+Projekt_bearbeitet --> Projekt_bearbeitet : Bearbeiten durch\nProjektleiter oder Projektmitarbeiter
+Projekt_bearbeitet --> Projekt_mit_Information : Weitere Information hinzufügen
+
+@enduml
