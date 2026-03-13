@@ -1,0 +1,34 @@
+@startuml
+title Simples Sequenzdiagramm - Hauptablauf
+
+actor Benutzer
+boundary UI
+database Datenbank
+
+Benutzer -> UI : Projekt erstellen
+alt Benutzer ist Projektleiter
+    UI -> Datenbank : Projekt speichern
+    Datenbank --> UI : OK
+    UI --> Benutzer : Projekt wurde erstellt
+else Benutzer ist nicht Projektleiter
+    UI --> Benutzer : Keine Berechtigung
+end
+
+Benutzer -> UI : Information zu Projekt erfassen
+UI -> Datenbank : Information mit Projektbezug speichern
+Datenbank --> UI : OK
+
+Benutzer -> UI : URL zu Information erfassen
+UI -> Datenbank : URL bei Information speichern
+Datenbank --> UI : OK
+
+Benutzer -> UI : Tag zu Information erfassen
+UI -> Datenbank : Tag bei Information speichern
+Datenbank --> UI : OK
+
+Benutzer -> UI : Tag in Projekt suchen
+UI -> Datenbank : Suche nach Tag im Projekt
+Datenbank --> UI : Suchresultate
+
+
+@enduml
