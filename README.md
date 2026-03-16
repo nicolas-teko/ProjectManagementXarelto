@@ -16,6 +16,7 @@ Damit die Anwendung lokal gestartet werden kann, werden folgende Komponenten ben
 
 Optional (für Datenbankanalyse):
 - **DB Browser for SQLite**
+  Download: https://sqlitebrowser.org/dl/
 
 ---
 
