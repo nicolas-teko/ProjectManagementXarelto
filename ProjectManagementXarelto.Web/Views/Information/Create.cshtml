@@ -1,0 +1,18 @@
+@using ProjectManagementXarelto.Core.Models
+@model InformationFormModel
+@{
+    var project = (Project)ViewBag.Project;
+    ViewData["Title"] = "Information erfassen";
+}
+
+<div class="form-page">
+    <a class="back-link" asp-controller="Projects" asp-action="Details" asp-route-id="@project.Id">← Zurück zu @project.Name</a>
+    <div class="page-heading compact-heading"><div><div class="eyebrow">@project.Name</div><h1>Information erfassen.</h1><p>Ergänze anschliessend Tags, Links und Kommentare.</p></div></div>
+    <form asp-action="Create" asp-route-projectId="@project.Id" method="post" class="surface form-surface">
+        <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+        <div class="field"><label asp-for="Text"></label><textarea asp-for="Text" rows="10" autofocus placeholder="Notiz, Anforderung, Entscheidung oder hilfreicher Kontext …"></textarea><span asp-validation-for="Text"></span></div>
+        <div class="form-actions"><a class="button button-secondary" asp-controller="Projects" asp-action="Details" asp-route-id="@project.Id">Abbrechen</a><button class="button button-primary" type="submit">Information speichern</button></div>
+    </form>
+</div>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

@@ -1,0 +1,27 @@
+@using ProjectManagementXarelto.Core.Models
+@model IReadOnlyList<User>
+@{
+    ViewData["Title"] = "Willkommen";
+}
+
+<section class="welcome-panel">
+    <div class="eyebrow">Projektwissen an einem Ort</div>
+    <h1>Willkommen bei Xarelto Projekte.</h1>
+    <p class="lead">Wähle eine Rolle, um Projekte, Informationen, Tags und Links einfach zu verwalten.</p>
+
+    <div class="role-grid">
+        @foreach (var user in Model)
+        {
+            var isLead = user.Role == RoleType.ProjectLead;
+            <form asp-action="Choose" method="post" class="role-card">
+                <input type="hidden" name="role" value="@user.Role" />
+                <div class="role-icon">@(isLead ? "◆" : "●")</div>
+                <div>
+                    <h2>@(isLead ? "Projektleiter" : "Projektmitarbeiter")</h2>
+                    <p>@(isLead ? "Erstellt und verwaltet Projekte sowie deren Inhalte." : "Arbeitet in Projekten mit und pflegt Informationen.")</p>
+                </div>
+                <button type="submit" class="button button-primary">Als @user.DisplayName starten <span>→</span></button>
+            </form>
+        }
+    </div>
+</section>

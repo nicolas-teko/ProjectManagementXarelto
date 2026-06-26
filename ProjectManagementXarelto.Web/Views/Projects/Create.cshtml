@@ -1,0 +1,20 @@
+@model ProjectFormModel
+@{
+    ViewData["Title"] = "Neues Projekt";
+}
+
+<div class="form-page">
+    <a class="back-link" asp-action="Index">← Zurück zur Übersicht</a>
+    <div class="page-heading compact-heading"><div><div class="eyebrow">Projekt erstellen</div><h1>Ein neues Projekt beginnen.</h1><p>Die Grunddaten lassen sich später erweitern.</p></div></div>
+    <form asp-action="Create" method="post" class="surface form-surface">
+        <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+        <div class="form-grid">
+            <div class="field"><label asp-for="Name"></label><input asp-for="Name" autofocus /><span asp-validation-for="Name"></span></div>
+            <div class="field"><label asp-for="CustomerName"></label><input asp-for="CustomerName" /><span asp-validation-for="CustomerName"></span></div>
+        </div>
+        <div class="field"><label asp-for="InitialDescription"></label><textarea asp-for="InitialDescription" rows="6" placeholder="Worum geht es in diesem Projekt?"></textarea><span asp-validation-for="InitialDescription"></span></div>
+        <div class="form-actions"><a class="button button-secondary" asp-action="Index">Abbrechen</a><button class="button button-primary" type="submit">Projekt speichern</button></div>
+    </form>
+</div>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

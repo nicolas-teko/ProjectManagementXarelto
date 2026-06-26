@@ -1,0 +1,444 @@
+Verwaltungssystem für Informationen in Projekten
+Fach:Lösungsalgorithmen und Programmieren
+Klasse:_B-TIA_TIP-24-T-a
+Version:V 1.0
+Autoren:Nicolas Wirth
+Dozent:Christian Herren
+Abgabedatum:16.03.2026
+Inhalt
+Einleitung4
+Situationsanalyse5
+Verständnis der Aufgabe6
+Abgrenzung6
+Zielsetzung8
+Messbare Ziele (SMART)8
+Anforderungsanalyse9
+Context Map (Systemkontext)9
+Funktionale Anforderungen10
+Nicht funktionale Anforderungen11
+User Stories11
+Testing14
+Teststrategie14
+Testplan14
+Durchgeführte Tests15
+Ergebnis15
+Fazit zum Testkonzept15
+Analyse nach UML - Rotem Faden16
+Use Case16
+Sequenzdiagramme16
+State Machine Diagramm17
+Klassendiagramm18
+Realisierung & Umsetzung21
+Technische Grundlage21
+Architektur22
+Datenbank23
+Frontend/UI24
+Quellcode und Repository27
+Planung und Controlling28
+Ausgangslage28
+Grobplanung28
+Analyse Ist vs. Soll29
+Erkenntnisse aus dem Controlling29
+Fazit der Planung29
+Ausblick31
+Erkenntnisse und Fazit32
+Technische Erkenntnisse32
+Persönliche Learnings32
+Verzeichnisse33
+Quellenverzeichnis und Tools33
+Abbildungsverzeichnis33
+Tabellenverzeichnis34
+Einleitung
+Diese Projektarbeit wurde im Modul Lösungsalgorithmen an der TEKO Bern im Wintersemester 2025/2026 erstellt. Im Rahmen der Arbeit sollte ein prototypisches Wissensmanagement-System in C# entwickelt werden, das auf objektorientierten Konzepten basiert.
+In realen Projekten entstehen fortlaufend verschiedene Informationen, etwa Anforderungen, Notizen, Designentscheidungen oder Verweise auf externe Unterlagen. Häufig werden solche Inhalte jedoch an unterschiedlichen Orten abgelegt, zum Beispiel in E-Mails, Chatverläufen oder in persönlichen Dateien. Dadurch besteht die Gefahr, dass Wissen verloren geht oder später nur mit grossem Aufwand wieder gefunden werden kann.
+Ziel dieser Arbeit ist daher die Entwicklung eines Systems, mit dem projektbezogene Informationen strukturiert erfasst, kategorisiert und kommentiert werden können. Zudem soll es möglich sein, diese Inhalte gezielt wiederzufinden.
+Gerade im Hinblick auf die kommende Diplomarbeit kann das System später auch als Referenz und unterstützendes Werkzeug genutzt werden.
+Die Arbeit orientiert sich an einem klar definierten Vorgehen. Dieses umfasst die Situationsanalyse, die Definition der Anforderungen, die Erstellung von UML-Modellen sowie die anschliessende Implementierung, Testphase und abschliessende Reflexion.
+Im Fokus steht dabei weniger die reine technische Umsetzung, sondern vor allem die nachvollziehbare Herleitung der Lösung auf Grundlage der durchgeführten Analyse.
+Situationsanalyse
+In der fiktiven IT-Firma Xarelto werden anscheinend mehrere Projekte gleichzeitig bearbeitet. Während der Projektarbeit fallen kontinuierlich unterschiedliche Informationen an, beispielsweise Notizen, Anforderungen, Designentscheidungen oder Verweise auf externe Dokumentationen.
+Diese Inhalte werden jedoch nicht an einer zentralen Stelle abgelegt. Stattdessen befinden sie sich verteilt in E-Mails, Chatverläufen oder in persönlichen Dateien einzelner Mitarbeitender. Dadurch ergeben sich verschiedene Schwierigkeiten:
+• Informationen zu den Projekten lassen sich nur schwer wiederfinden• Wissen geht im Verlauf der Zeit verloren• Aufgaben werden teilweise doppelt erledigt• Frühere Entscheidungen sind im Nachhinein nur schwer nachvollziehbar
+Das eigentliche Problem liegt daher nicht darin, dass Informationen fehlen, sondern darin, dass sie unstrukturiert abgelegt sind und nicht gezielt wiedergefunden werden können.
+Aus diesem Grund soll im Rahmen dieser Arbeit eine einfache Wissensmanagement-Applikation entwickelt werden. Diese soll projektbezogene Informationen speichern und die Verwaltung von Projekten zumindest theoretisch vereinfachen.
+Der Schwerpunkt liegt dabei bewusst auf der Entwicklung eines Prototyps mit einem klar abgegrenzten Funktionsumfang.
+Verständnis der Aufgabe
+Im Rahmen dieser Arbeit wird eine Desktop-Applikation in C# entwickelt. Diese Anwendung soll dazu dienen, projektbezogene Informationen zu erfassen und zu verwalten. Dabei müssen folgende grundlegenden Funktionen umgesetzt werden:
+Projektverwaltung:
+Erfassung von Projektname (Pflichtfeld), Kunde, Projektleitung und Kernanforderungen 
+Anzeige der Projektdaten in einer Übersicht 
+Informationserfassung:
+Erfassung von Textinformationen 
+Erfassung von URL-Informationen (Bild oder Dokument) 
+Eindeutige Zuordnung jeder Information zu genau einem Projekt 
+Tagging:
+Vergabe von genau 0–3 Tags pro Information 
+Kommentierung:
+Erfassung von Ergänzungen oder Kommentarenpro Information,mit Erstellungs- / Änderungsdatum
+Speicherung von Autor des Kommentars
+Suche:
+Filterung der Informationen nach Tags, innerhalb des ausgewählten Projekts
+Abgrenzung
+Da es sich bei dieser Arbeit um einen Prototyp handelt, wird der Funktionsumfang bewusst eingeschränkt. Die folgenden Aspekte sind daher nicht Bestandteil der Umsetzung:
+Es wird lediglich eine vereinfachte Benutzer- und Rechteverwaltung umgesetzt. Die Rollen Projektleiter und Projektmitarbeiter sind vorgesehen, jedoch ohne vollständiges Login-System. Statt einer echten Anmeldung erfolgt lediglich eine Auswahl der entsprechenden Rolle.
+Das System ist auf maximal 100 Informationseinträge ausgelegt. Eine Optimierung hinsichtlich Skalierung, grosser Datenmengen oder paralleler Benutzerzugriffe wird nicht berücksichtigt.
+Die Suchfunktion basiert ausschliesslich auf Tags. Eine Volltextsuche oder komplexere Filtermöglichkeiten wird nicht umgesetzt.
+Die Benutzeroberfläche ist bewusst einfach aber funktional gehalten. Eine Ausarbeitung auf dem Niveau eines marktreifen Produkts ist nicht Ziel dieser Arbeit.
+Diese klare Abgrenzung ermöglicht es, den Schwerpunkt auf Analyse, Modellierung sowie die objektorientierte Umsetzung der Lösung zu legen.
+Zielsetzung
+Ziel dieser Projektarbeit ist die Entwicklung eines Wissensmanagementsystems in C#, mit dem projektbezogene Informationen strukturiert erfasstund gezielt wiedergefunden werden können.
+Die Zielerreichung gilt als erfüllt, sobald alle definierten SMART-Ziele technisch umgesetzt und im Rahmen von Tests erfolgreich überprüft wurden.
+Messbare Ziele (SMART)
+Die folgenden Ziele wurden nach dem SMART-Prinzip formuliert. Sie sind spezifisch, messbar, erreichbarund sollten zeitlich im Rahmen der Projektarbeitszeit umsetzbar sein.
+Tabelle 1: Smart Ziele
+Nr.
+Ziel (SMART)
+Messgrösse / Zielwert
+1
+Projektverwaltung implementieren
+In der Anwendung kann ein Projekt erstellt und angezeigt werden. Ein Projekt enthält Projektname, Kunde, Projektleiter und Kernanforderungen.
+2
+Informationseinträge pro Projekt verwalten
+Innerhalb eines Projekts können Informationseinträge erstellt und angezeigt werden. Einträge können Text oder eine URL (z. B. Bild oder Dokument) enthalten.
+3
+Tagging-Funktion umsetzen
+Jeder Information können maximal drei Tags zugewiesen werden. Eine Validierung oder ähnliches verhindert die Vergabe von mehr als drei Tags.
+4
+Kommentarfunktion realisieren
+Zu jeder Information kann mindestens ein Kommentar erfasst werden. Kommentare sind klar vom ursprünglichen Inhalt unterscheidbar dargestellt.
+5
+Tagbasierte Suche implementieren
+Benutzer können innerhalb eines Projekts nach Tags suchen und erhalten eine Liste der passenden Informationseinträge.
+6
+Prototypische Datenbegrenzung einhalten
+Die Anwendung ist auf maximal 100 Informationseinträge ausgelegt.
+7
+Benutzeroberfläche bereitstellen
+Alle Funktionen (Projekt erfassen, Informationen hinzufügen, Tags vergeben, kommentieren, suchen) sind über eine grafische Oberfläche ohne Codeeingriff demonstrierbar.
+8
+Funktionsnachweis durch Tests erbringen
+Für alle Hauptfunktionen werden Testfälle geplant, durchgeführt und dokumentiert.
+9
+Technische Dokumentation erstellen
+Der Bericht beschreibt nachvollziehbar das Vorgehen von Analyse über Modellierung bis zur Umsetzung.
+10
+UML-Analyse dokumentieren
+Die Analyse mit UML-Diagrammen wird so dargestellt, das der Lösungsweg nach dem roten Faden nachvollziehbar ist.
+Anforderungsanalyse
+Die Anforderungsanalyse wurde in einer frühen Phase der Projektarbeit nach vor der eigentlichen Umsetzung der Applikation erarbeitet. Ziel war es, die zentralen Funktionen des Systems sowie die wichtigsten nicht funktionalen Erwartungen festzuhalten und gleichzeitig mögliche Risiken frühzeitig zu erkennen. Dazu wurden die wesentlichen Aktivitäten des Systems beschrieben, die dafür benötigten Eingaben und die erwarteten Ergebnisse festgelegt. Zusätzlich wurden die Anforderungen hinsichtlich Eintrittswahrscheinlichkeit und Ausmass bewertet, damit kritische Punkte früh sichtbar werden. Diese Analyse bildete die Grundlage für die spätere UML-Modellierung und die Ausarbeitung des Testplans.
+Context Map (Systemkontext)
+Zu Beginn der Analyse wurde eine Context Map erstellt, um die verschiedenen Bereiche der Applikation sowie deren Beziehungen zueinander zu verdeutlichen.
+Diese wurde ganz am Anfang der Arbeit ausgearbeitet und aus Effizienzgründen von Hand skizziert. Diese Context Map war nur simpel angedacht, entwickelte sich aber dann durch diverse Gedankensprünge eher zum einem ausskizzierten Use Case Diagramm.
+Abbildung 1: Context Map
+Funktionale Anforderungen
+Die funktionalen Anforderungen beschreiben die zentralen Funktionen, welche das Verwaltungssystem für Projektinformationen erfüllen muss. Für die Speicherung der Daten wird SQLite verwendet, wobei die Speicherung der Daten in der Datenbank mit dem ‘DB-Browser for SQLite Cipher’ geprüft und nachvollzogen wird.
+Für die Bewertung der Anforderungen wurde die Risikoprioritätszahl (RPN) aus Eintrittswahrscheinlichkeit × Ausmass gebildet. Werte von 10 bis 25 wurden als critical, Werte von 5 bis 9 als major und Werte von 1 bis 4 als minor eingestuft.
+Dass in der Analyse nur RPN-Werte von 10 erreicht werden, ist aus meiner Sicht darauf zurückzuführen, dass die Anwendung mit einer klaren und einfachen Architektur umgesetzt wurde und dadurch die Eintrittswahrscheinlichkeit vieler möglicher Fehler nach meiner Abschätzunggeringgehaltenwird.
+Die detaillierte Übersicht der funktionalen Anforderungen ist im AnforderungsanalyseExcel-Dokument festgehalten.Das Dokument ist unter folgendem Link verfügbar:https://github.com/nicolas-teko/ProjectManagementXarelto/blob/master/Dokumentation/Anforderungsanalyse-Verwaltungssystem.xlsx
+Abbildung 2: Anforderungsanalyse - Funktionale Anforderungen
+Nicht funktionale Anforderungen
+Die nicht funktionalen Anforderungen beschreiben die qualitativen und organisatorischen Erwartungen an die Anwendung. Dazu gehören insbesondere Benutzerfreundlichkeit, Übersichtlichkeit, Nachvollziehbarkeit sowie die Einhaltung des vorgegebenen Prototyp-Umfangs. Die vollständige Auflistung dieser Anforderungen ist im AnforderungsanalyseExcel-Dokumentfestgehalten.Das Dokument ist unter folgendem Link verfügbar:https://github.com/nicolas-teko/ProjectManagementXarelto/blob/master/Dokumentation/Anforderungsanalyse-Verwaltungssystem.xlsx
+Abbildung 3: Anforderungsanalyse - Nicht funktionale Anforderungen
+User Stories
+Die User Stories wurden auf Basis der funktionalen Anforderungen erarbeitet und fassen die wichtigsten Funktionen der Anwendung in system- und auch benutzerorientierter Form zusammen. Sie werden als Grundlage für die Definition der Testfälle verwendet.
+Tabelle 2: User Stories
+ID
+Titel
+Rolle
+US-01
+Projekt erfassen
+Projektleiter
+Als Projektleiter möchte ich ein neues Projekt mit Name, Kunde, Projektleiter und Kernanforderungen erfassen und speichern, damit das Projekt im System angelegt und weiterbearbeitet werden kann.
+Critical
+US-02
+Berechtigung Projekterstellung
+System
+Als System möchte ich verhindern, dass nicht berechtigte Benutzer ein neues Projekt erstellen können, damit nur der Projektleiter diese Funktion ausführen darf.
+Major
+US-03
+Information einem Projekt erfassen
+Projektleiter / Projektmitarbeiter
+Als Projektleiter oder Projektmitarbeiter möchte ich einem bestehenden Projekt eine neue Information zuordnen, damit projektbezogenes Wissen erfasst werden kann.
+Critical
+US-04
+Information bearbeiten
+Projektleiter / Projektmitarbeiter
+Als Projektleiter oder Projektmitarbeiter möchte ich eine bestehende Information bearbeiten können, damit Inhalte aktualisiert und korrigiert werden können.
+Critical
+US-05
+Text oder URL zu Information erfassen
+Projektleiter / Projektmitarbeiter
+Als Projektleiter oder Projektmitarbeiter möchte ich zu einer Information einen Text oder eine URL erfassen, damit weiterführende Inhalte und Verweise gespeichert werden können.
+Major
+US-06
+Gespeicherte URL öffnen
+Benutzer
+Als Benutzer möchte ich eine gespeicherte URL direkt öffnen können, damit ich auf verlinkte Inhalte wie Bilder oder Dokumente zugreifen kann.
+Major
+US-07
+Kommentar erfassen
+Projektleiter / Projektmitarbeiter
+Als Projektleiter oder Projektmitarbeiter möchte ich zu einer bestehenden Information einen Kommentar erfassen, damit Ergänzungen und Hinweise dokumentiert werden können.
+Critical
+US-08
+Kommentar mit Datum anzeigen
+Benutzer
+Als Benutzer möchte ich Kommentare zusammen mit dem Erstellungsdatum sehen, damit nachvollziehbar bleibt, wann ein Eintrag erstellt wurde.
+Major
+US-09
+Kommentar bearbeiten
+Projektleiter / Projektmitarbeiter
+Als Projektleiter oder Projektmitarbeiter möchte ich einen bestehenden Kommentar bearbeiten können, damit Ergänzungen oder Korrekturen nachträglich möglich sind.
+Major
+US-10
+Bis zu drei Tags vergeben
+Projektleiter / Projektmitarbeiter
+Als Projektleiter oder Projektmitarbeiter möchte ich einer Information bis zu drei Tags zuweisen, damit Inhalte strukturiert und später einfacher auffindbar sind.
+Critical
+US-11
+Mehr als drei Tags verhindern
+System
+Als System möchte ich mehr als drei Tags pro Information verhindern, damit die definierte Regel der Anwendung eingehalten wird.
+Critical
+US-12
+Tag-Suche im Projekt
+Projektleiter / Projektmitarbeiter
+Als Projektleiter oder Projektmitarbeiter möchte ich innerhalb eines Projekts nach Tags suchen, damit ich schnell die passenden Informationen finde.
+Critical
+US-13
+Daten persistent speichern
+Benutzer
+Als Benutzer möchte ich, dass meine gespeicherten Projekte, Informationen, Kommentare und Tags nach dem Schliessen der Anwendung erhalten bleiben, damit keine Daten verloren gehen.
+Minor
+US-14
+Übersichtliche Darstellung
+Benutzer
+Als Benutzer möchte ich Projekte und Informationen übersichtlich dargestellt bekommen, damit ich mich in der Anwendung einfach orientieren kann.
+Minor
+Testing
+Teststrategie
+Die Teststrategie wurde auf Basis der Anforderungsanalyse bzw. der User Stories und der definierten Risiken festgelegt. Ziel war der Nachweis, dass die zentralen Funktionen des Prototyps korrekt umgesetzt werden und damit die Anforderungen der Aufgabenstellung erfüllen. Der Fokus lag dabei bei Tests zu den wichtigsten Anwendungsfällen wie Projekterfassung, Informationserfassung, Tag-Verwaltung, Kommentierung und Tag-Suche.
+Die Tests werden manuell durchgeführt, da es sich bei der entwickelten Anwendung um einen überschaubaren Prototyp handelt und sich die geforderten Funktionen auf diese Weise einfach und nachvollziehbar testenlassen. Besonders wichtige, beziehungsweise kritische Anforderungen wurden im Test stärker gewichtet.Da diese für die Grundfunktion der Anwendung zwingend erfüllt sein müssen. Die Tests wurden so aufgebaut, dass jeweils klar festgehalten ist, was geprüft wird, was dafür gegeben sein muss und wann ein Test als erfüllt gilt.
+Testplan
+Der Testplan wurde direkt aus den funktionalen Anforderungen und den User Stories abgeleitet. Für jeden Testfall wurden die zu prüfende Funktion, die Voraussetzungen, das erwartete Ergebnis sowie das spätere Testergebnis festgehalten.Die Ergebnisse werden in die drei Kategorien erfüllt, teilweise erfüllt und nicht erfüllt eingeteilt. 
+Der vollständig ausgearbeitete Testplan mit den dokumentierten Resultaten ist im beigelegten Testplan Excel-Dokument umgesetzt.
+Das Dokument ist unter folgendem Link verfügbar:https://github.com/nicolas-teko/ProjectManagementXarelto/blob/master/Dokumentation/Testplan-Verwaltungssystem.xlsx
+Abbildung 4: Testplan
+Durchgeführte Tests
+Die Tests wurden nach Abschluss des Prototypen anhand des vorbereiteten Testplans durchgeführt. Dabei wurden die einzelnen Testfälle geprüft und die Resultate direkt dokumentiert.
+Als erfüllt gelten Testfälle, bei denen die erwartete Funktion vollständig korrekt umgesetzt wurde. Teilweise erfüllt bedeutet, dass die Grundfunktion vorhanden ist, jedoch noch Einschränkungen bestehen. Nicht erfüllt wurde verwendet, wenn eine Funktion im aktuellen Stand nicht umgesetzt werden konnte.
+Ergebnis
+Der grösste Teil der zentralen Funktionen konnte erfolgreich nachgewiesen werden. Das Bearbeiten von Kommentaren war eigentlich vorgesehen, habe ich aber aus zeitlichen Gründen nicht mehr umgesetzt und wurde deshalb im aktuellen Prototypen weggelassen. Ebenfalls zeigte sich, dass das Benutzerinterface zwar funktional gut ist, durch die verschachtelte Struktur der Forms noch intuitiver aufgebaut werden könnte. Insgesamt konnte dennoch gezeigt werden, dass der Grossteil der funktionellen Anforderungen der Aufgabenstellung im Prototypen erfüllt wurden.
+Für die detaillierte Auflistung der einzelnen Resultate wird auf die jeweilige Spalte ‘Testergebnisse’ im beigefügten Testplan-Excel-Dokument verwiesen.
+Fazit zum Testkonzept
+Das erarbeitete Testkonzept stellt sicher, dass alle funktionalen Anforderungen vollständig überprüft werden. Gleichzeitig ermöglicht es eine strukturierte und nachvollziehbare Durchführung der Tests. Die festgelegten Funktionenwurdendabei gezielt kontrolliert, und die definierten Testfälle können jederzeit reproduziert werden.
+Auf diese Weise wird der geforderte Nachweis der Funktionalität gemäss den Projektvorgaben prüfbar.
+Analyse nach UML- Rotem Faden
+Wie im Unterricht erlernt, wurde eine vollständige Analyse nach UML mithilfe des vermittelten ‘roten Faden’ umgesetzt.
+Use Case
+Das Use-Case-Diagramm zeigt die wichtigsten fachlichen Funktionen des Wissensmanagement-Systems aus Sicht der beteiligten Benutzerrollen. Es verdeutlicht, welche Anwendungsfälle durch den Projektleiter beziehungsweise den Projektmitarbeiter ausgeführt werden können und auch welche Funktion nur dem Projektleiter vorbehalten ist. Dadurch hilft das Diagramm, den funktionalen Umfang der Anwendung übersichtlich darzustellen und die zentralen Interaktionen bereits in der Analysephase klar darzustellen.
+Abbildung 5: UML - Use Case
+Sequenzdiagramme
+Dieses Sequenzdiagramm zeigt den vereinfachten Ablauf der wichtigsten Interaktionen zwischen Benutzer, Benutzeroberfläche und Datenbank. Es ist hilfreich, um die einzelnen Verarbeitungsschritte einer Funktion in zeitlicher Reihenfolge verständlich und nachvollziehbar darzustellen. Zusätzlich wird ersichtlich, dass ein Projekt nur durch den Projektleiter erstellt werden darf und wann weitere Funktionen wie das Erfassen von Informationen, URLs und Tags innerhalb des Projekts stattfinden.
+Abbildung 6:UML - Sequenzdiagramm
+State Machine Diagramm
+Das State-Machine-Diagramm zeigt den Zustandsverlauf eines Projekts innerhalb der Anwendung. Es hilft dabei, die Veränderungen eines Projekts während seiner Bearbeitung übersichtlich darzustellen und die einzelnen Zustände sowie deren Übergänge besser nachzuvollziehen. Die Schleife im Zustand „Projekt bearbeitet“ verdeutlicht, dass solche Anpassungen mehrfach durch den Projektleiter oder Projektmitarbeiter vorgenommen werden können.
+Abbildung 7: UML - State Machine
+Klassendiagramm
+Das Klassendiagramm verdeutlicht die wichtigsten Klassen der Anwendung sowie deren Beziehungen untereinander. Dadurch wird der grundlegende Aufbau des Systems und die Struktur der verwendeten Datenobjekte klar ersichtlich.
+Abbildung 8: UML - Klassendiagramm
+Klassen und Bedeutung
+Tabelle 3: Klassen und Bedeutung
+Klasse 
+Bedeutung
+Project
+Ein Projekt ist der Rahmen für alle Informationen. Beim Anlegen werden Projektname, Kunde, Projektleiter und eine initiale Projektbeschreibung gespeichert. Ein Projekt enthält mehrere Informations-Elemente.
+Information
+Eine Information ist ein Eintrag innerhalb eines Projekts. Sie beschreibt einen beliebigen Sachverhalt im Projekt. Eine Information kann bearbeitet werden und enthält Metadaten wie Erstellungs- und Änderungszeitpunkt.
+Comment
+Ein Kommentar gehört zu einer Information und dient zur Ergänzung einer Information. Kommentare können von Projektleiter oder Projektmitarbeiter erstellt werden und sind nach Erstellung gegenwärtig nicht mehr editierbar.
+InfoTag
+Ein Tag dient zur Kategorisierung einer Information. Eine Information kann bis zu drei Tags besitzen. Tags ermöglichen das Suchen nach bzw. Filtern von Informationen innerhalb eines Projekts.
+InfoLink
+Ein Link verweist auf externe Ressourcen wie Dokumente oder Bilder, die zu einer Information gehören. Jeder Link besitzt eine URL und einen Typ (Image oder Document).
+LinkType
+Enumeration zur Klassifikation von Links. Unterscheidet zwischen Bild-Links (Image) und Dokument-Links (Document).
+Realisierung & Umsetzung
+Technische Grundlage
+Die Applikation wurde in C# mit .NET als Windows-Desktopanwendung (WinForms) entwickelt. Ziel war es, die zuvor definierten Anforderungen sowie die erstellten UML-Modelle in eine funktionsfähige Anwendung umzusetzen.
+Für den Prototyp wurde bewusst eine einfache Umsetzung gewählt. Die zentralen Funktionen sollen dabei klar demonstriert werden: Projekte anlegen, Informationen erfassen, Tags zuweisen, Kommentare hinzufügen sowie eine Suche über Tags durchführen.
+Damit der Code übersichtlich bleibt und einfacher gewartet werden kann, wurde die Anwendung in drei Bereiche strukturiert:
+ProjectManagementXarelto.App:Enthält die Benutzeroberfläche mit den verschiedenen WinForms-Masken, zum Beispiel Login, Projektübersichtsowie Formulare zum Erstellen und Bearbeiten von Informationen.
+ProjectManagementXarelto.Core: Enthält die fachlichen Modelle und grundlegenden Anwendungsbestandteile, beispielsweise Project, Information, InfoTag, InfoLink, Comment sowie den SessionContext.
+ProjectManagementXarelto.Data: Enthält den Datenzugriff mit Entity Framework Core, den AppDbContext, Migrationen sowie die Initialisierung der Datenbank.
+Diese Aufteilung sorgt dafür, dass Benutzeroberfläche, Datenmodell und Datenzugriff voneinander getrennt bleiben. Dadurch wird die Anwendung besser verständlich, einfacher erweiterbar. 
+C4- Modell:
+Das folgende C4-Modell veranschaulicht die grundlegende Systemarchitektur der Anwendung und zeigt, wie Benutzeroberfläche, Anwendungslogik und Datenbank innerhalb des Systems miteinander interagieren.
+Abbildung 9: C4 - Architekturmodell
+Architektur
+Die Software wurde istsimple Desktopanwendung mit schichtähnlicher Struktur angedacht und umgesetzt. Dabei kommuniziert die Benutzeroberfläche mit den fachlichen Modellen und greift über den Datenzugriff auf die SQLite-Datenbank zu.
+Die Architektur besteht aus drei zentralen Ebenen:
+UI-Ebene: Darstellung der Formulare und Verarbeitung der Benutzereingaben
+Modell & Logikebene: Abbildung der fachlichen Struktur der Anwendung
+Datenzugriffsebene: Verwaltung der Persistenz über Entity Framework Core
+Durch diese Struktur konnte die Anwendung einfach gehalten werden, ohne vollständig auf eine saubere Trennung der Verantwortlichkeiten zu verzichten.
+Die fachlichen Hauptobjekte sind:
+Project als Rahmen eines Projekts
+Information als eigentlicher Informationseintrag innerhalb eines Projekts
+Comment für Kommentare zu einer Information
+InfoTag zur Kategorisierung einer Information
+InfoLink für Bild- und Dokumentenlinks
+Die Rollenlogik wurde ebenfalls im Backend berücksichtigt. Dabei gilt:
+Nur ein Projektleiter darf ein neues Projekt erstellen.
+Projektleiter und Projektmitarbeiter dürfen Informationen erfassen und bearbeiten.
+Projektleiter und Projektmitarbeiter dürfen Kommentare hinzufügen.
+Zusätzlich wurde ein SessionContext verwendet, um den aktuell eingeloggten Benutzer während der Laufzeit der Anwendung verfügbar zu halten.
+Umsetzung der Tag Suche
+Die Tag-Suche wurde auf der Detailansicht eines Projekts umgesetzt. Ziel war es, die vorhandenen Informationen innerhalb eines Projekts nach einem bestimmten Tag zu filtern.
+Technisch erfolgt dies über eine Abfrage auf den Informationseinträgen des aktuell geöffneten Projekts. Falls ein Suchbegriff vorhanden ist, wird geprüft, ob eine Information ein entsprechendes Tag enthält. Nur diese Informationen werden anschliessend in der Liste angezeigt.
+Dadurch kann der Benutzer gezielt nach thematisch passenden Informationen suchen, ohne die gesamte Informationsliste manuell durchsuchen zu müssen.
+Die Tag-Suche ist direkt in die Projektansicht integriert.
+Datenbank
+Obschon dies nicht spezifisch Teil der Aufgabenstellung war, wurde eine SQLite-Datenbankfür die persistente Speicherung der Daten verwendet. Diese eignet sich gut für eine lokale Desktopanwendung, da keine Serverinstallation notwendig ist. Die Datenbank wird als einzelne Datei gespeichert und kann direkt von der Anwendung verwendet werden.
+Der Zugriff auf die Datenbank erfolgt über Entity Framework Core (EF Core). Dabei werden die im Code definierten Klassen als Datenmodell verwendet. EF Core übernimmt die Abbildung dieser Klassen auf die entsprechenden Tabellen in der Datenbank. Änderungen am Datenmodell können über Migrationen in die Datenbankstruktur übernommen werden.
+Beim Start der Anwendung wird sichergestellt, dass die Datenbankstruktur vorhanden ist. Zusätzlich werden zwei vordefinierte Benutzer (Projektleiter und Projektmitarbeiter) erstellt, um die Rollenlogik der Anwendung demonstrieren zu können.
+DB Browser (SQLite Cipher)
+Zur Analyse und Überprüfung der Datenbank wurde das Tool ‘DB Browser for SQLite (SQLite Cipher)’ verwendet. Dieses Werkzeug ermöglicht es, die SQLite-Datenbank direkt zu öffnen und deren Tabelleninhalte einzusehen. Dadurch konnte ich während der Entwicklung schnell überprüfen, ob Datensätze korrekt in die Datenbank geschrieben wurden. Insbesondere beim Testen war es hilfreich, die tatsächlichen Einträge in den Tabellen zu kontrollieren. Das Tool erleichterte somit das Verständnis der Datenstruktur und unterstützt beider Fehlersuche während der Implementierung.
+Abbildung 10: DB Browser (SQLite Cipher)
+Frontend/UI
+Die Benutzeroberfläche wurde mit Windows Forms umgesetzt. Dabei wurde auf eine einfache und funktionale Gestaltung geachtet. Im Vordergrund stand nicht ein modernes Design, sondern eine klare Bedienbarkeit und eine nachvollziehbare Umsetzung der Anforderungen.
+DieFroms sind:
+LoginForm: Auswahl der Rolle Projektleiter oder Projektmitarbeiter
+Abbildung 11: LoginForm
+ProjectsForm: Übersicht aller Projekte
+Abbildung 12: ProjectsForm
+ProjectCreateForm: Erfassung eines neuen Projekts
+Abbildung 13: ProjectCreateForm
+ProjectDetailsForm: Anzeige der Projektdetails und der zugehörigen Informationen
+Abbildung 14: ProjectDetailsForm
+InformationCreateForm: Erfassung einer neuen Information
+Abbildung 15: InformationCreateForm
+InformationEditForm: Bearbeitung einer Information, Verwaltung von Tags, Links und Kommentaren
+Abbildung 16: InformationEditForm
+Die Navigation innerhalb der Anwendung erfolgt Form basiert. Der Benutzer startet in der Login-Maske und gelangt anschliessend zur Projektübersicht. Von dort aus können weitere Detailmasken geöffnet werden.
+Bei der Umsetzung wurde darauf geachtet, dass Funktionen je nach Rolle sichtbar oder nutzbar sind. So wird beispielsweise der Button zum Erstellen eines Projekts nur für Benutzer mit der Rolle Projektleiter angezeigt.
+Quellcode und Repository
+Der vollständige Quellcode der entwickelten App ist im zugehörigen GitHub-Repository verfügbar. Das Repository enthält den gesamten Projektcode, die Projektstruktur sowie die zur Umsetzung verwendeten Komponenten.
+Um die Anwendung lokal auszuführen, kann ein Klon des öffentlichen Repositories erstellt werden. Die notwendigen Voraussetzungen sowie eine kurze Anleitung zur Installation und zum Start der Anwendung sind im README.md des Repositories beschrieben.
+Link zum Github Repository: https://github.com/nicolas-teko/ProjectManagementXarelto
+Planung und Controlling
+Ausgangslage
+Die Projektarbeit wurde als Einzelarbeit durchgeführt. Daraus ergab sich für mich ein geplanter Gesamtaufwand von rund 40 Lektionen. Zu Beginn wurde die Arbeit in grobe Phasen gegliedert, damit die Umsetzung strukturiert entlang des im Unterricht vermittelten roten Fadens erfolgen konnte.
+Die Planung wurde bewusst einfach und realistisch gehalten. Da es sich um einen Prototyp im Ausbildungsrahmen handelt, stand weniger eine detaillierte Feinplanung im Vordergrund, sondern vielmehr eine pragamtische Einteilung der Arbeitsschritte. Gleichzeitig war es für mich schwierig, den effektiven Aufwand für die Umsetzung des Prototyps genau abzuschätzen, da ich noch über wenig Erfahrung im Programmieren verfügte.
+Grobplanung
+Die Grobplanung diente als Grundlage für die zeitliche und inhaltliche Strukturierung des Projekts. Geplant wurden die Phasen Analyse, Anforderungsanalyse, UML-Modellierung, Umsetzung, Testkonzept und Durchführung sowie Dokumentation. Die Schätzung basierte auf Erfahrungswerten aus dem Unterricht sowie auf einer ersten Einschätzung der fachlichen und technischen Komplexität.
+Im Verlauf der Umsetzung zeigte sich, dass insbesondere die Ausarbeitung der User Stories und der Anforderungsanalyse mehr Zeit in Anspruch nahm als ursprünglich angenommen. Den grössten Mehraufwand verursachte jedoch die Umsetzung der Applikation, da neben dem eigentlichen Code auch das User Interface und Teile der Systemarchitektur ausgearbeitet werden mussten. Gerade wegen meiner geringen Vorerfahrung im Programmieren war dieser Aufwand zu Beginn nur schwer realistisch abschätzbar.
+Tabelle 4: Planung
+Phase
+Inhalt
+Geplant (Lektionen)
+Effektiv (Lektionen)
+Delta
+Analyse
+Situationsanalyse, Aufgabenverständnis, Abgrenzung
+5
+5
+0
+Anforderungsanalyse
+User Stories, Anforderungen, Akzeptanzkriterien
+5
+7
++2
+UML-Modellierung
+Klassendiagramm und weitere UML-Diagramme
+5
+5
+0
+Umsetzung
+Umsetzung Code, UI, 
+Systemarchitektur
+7
+12
++5
+Testkonzept & Durchführung
+Testplanung, Testfälle, Durchführung
+4
+4
+0
+Dokumentation
+Strukturierung und Ausformulierung
+4
+4
+0
+Total
+30
+37
++7
+Analyse Ist vs. Soll
+Die effektive Arbeitszeit lag mit 45 Lektionen über der ursprünglichen Planung von 40 Lektionen. Die Differenz von +7 Lektionen entstand in dieser Arbeit vor allem in der Anforderungsanalyse und in der Umsetzungsphase.
+Bei der Anforderungsanalyse war insbesondere die Ausarbeitung der User Stories, der Anforderungen und der Akzeptanzkriterien aufwendiger als zunächst erwartet. Hier zeigte sich, dass eine saubere fachliche Analyse mehr Zeit benötigt, gleichzeitig aber eine wichtige Grundlage für die spätere Modellierung und Umsetzung ist.
+Der deutlich grösste Mehraufwand entstand in der Umsetzungsphase. Neben der eigentlichen Programmierung musste auch das Benutzerinterface sowie grundlegende Aspekte der Systemarchitektur erarbeitet und von mir verstanden werden. Da ich zu Beginn noch wenig Erfahrung im Programmieren hatte, benötigte die praktische Umsetzung einzelner Funktionen mehr Zeit als ursprünglich eingeplant. Viele technische Zusammenhänge mussten dabei zuerst ausprobiert und schrittweise verbessert werden.
+Erkenntnisse aus dem Controlling
+Die Gegenüberstellung von geplanter und effektiver Arbeitszeit zeigt, dass besonders die fachliche Vorarbeit und die praktische Umsetzung mehr Zeit beanspruchen können als zunächst angenommen. Gerade die Anforderungsanalyse mit User Stories wurde in dieser Arbeit aufwendiger, als es zu Beginn erwartet wurde. Noch deutlicher zeigte sich dies bei der Umsetzung, da der Aufwand für Code, UI und Systemarchitektur wegen der geringen Programmiererfahrung nur schwer im Voraus einschätzbar war.
+Tabelle 5: Erkenntnisse aus dem Controlling
+Erkenntnis
+Bedeutung für zukünftige Projekte
+Anforderungsanalyse benötigt mehr Zeit als erwartet
+Für User Stories und fachliche Vorbereitung künftig mehr Zeit einplanen
+Umsetzung ist schwer abschätzbar, wenn wenig Programmiererfahrung vorhanden ist
+Für Code, UI und technische Umsetzung grössere Zeitreserven vorsehen
+Systemarchitektur und Benutzeroberfläche erzeugen zusätzlichen Aufwand
+Nicht nur den Code, sondern auch Struktur und UI bei der Planung stärker berücksichtigen
+Saubere Vorarbeit verbessert die Orientierung im Projekt
+Frühe Phasen weiterhin strukturiert und sorgfältig ausarbeiten
+Fazit der Planung
+Die Projektarbeit wurde insgesamt strukturiert durchgeführt. Trotz einer leichten Zeitüberschreitung konnte der geplante Funktionsumfang grösstenteils umgesetzt und die Arbeit vollständig ausgearbeitet werden.
+Die Planung erwies sich grundsätzlich als brauchbar, zeigte jedoch deutlich, dass insbesondere die Anforderungsanalyse und die Umsetzungsphase mehr Aufwand verursachen können als anfänglich erwartet. Für zukünftige Arbeiten empfiehlt es sich deshalb, gerade für die fachliche Vorbereitung sowie für Code, UI und Systemarchitektur grosszügigere Zeitreserven einzuplanen.
+Ausblick
+Die aktuelle Version der Anwendung deckt die grundlegenden Funktionen des Prototyps ab, bietet jedoch noch mehrere Möglichkeiten zur Weiterentwicklung. Folgende Erweiterungen würden die Anwendung funktional sowie hinsichtlich der Benutzerfreundlichkeit verbessern:
+Erweiterung der Bearbeitungs- und LöschfunktionenAktuell können Projekte, Informationen und Kommentare noch nicht gelöscht werden. Zudem sind Kommentare nach der Erstellung nicht editierbar. Eine Erweiterung dieser Funktionen würde die Flexibilität der Anwendung erhöhen.
+Überarbeitung des BenutzerinterfacesDie aktuelle Oberfläche ist funktional, jedoch durch die verschachtelte Struktur der Forms teilweise noch wenig intuitiv. Eine klare Struktur der Benutzeroberfläche würde die Bedienbarkeit verbessern.
+Verbesserte Navigation innerhalb der AnwendungEine einfachere Navigationsstruktur mit weniger Zwischenschritten sowie Komfortfunktionen wie eine Back-Funktion, über die Benutzer jederzeit zur vorherigen Ansicht zurückkehren können, würde die Nutzung der Anwendung deutlich angenehmer machen.
+Erkenntnisse und Fazit
+Technische Erkenntnisse
+Die Projektarbeit hat gezeigt, dass eine strukturierte Vorgehensweise bei der Entwicklung einer Softwarelösung eindeutig von Vorteil ist. Besonders die Analysephase nach dem im Unterricht vermittelten roten Faden und die Anforderungsanalyse haben wesentlich dazu beigetragen, die Problemstellung genau zu verstehen und einen passenden Prototypen zu planen. Vor allem das Klassendiagramm erwies sich für mich als sehr hilfreich, da die Beziehungen zwischen Projekt, Information, Kommentar, Tags und Links bereits im Voraus definiert waren und so als Orientierung für die spätere Umsetzung des Codes dienen konnten.
+Während der praktischen Umsetzung wurde für mich jedoch auch deutlich, dass der Entwicklungsaufwand für mich schwer abzuschätzen ist. Da ich zu Beginn noch wenig Erfahrung im Programmieren hatte, benötigte die Umsetzung einzelner Funktionen mehr Zeit als ursprünglich angenommen. Besonders das Umsetzen der Logik, des Datenmodells und der Datenbank musste Schritt für Schritt erarbeitet und teilweise erneut angepasst werden. Dabei habe ich auch intensiv Unterstützung durch KI genutzt, um effizienter und pragmatisch voranzukommen. Dennoch entwickelte sich dadurch auf jeden Fall ein deutlich besseres Verständnis für objektorientierte Softwareentwicklung und für den grundlegenden Aufbau einer solchen Anwendung.
+Persönliche Learnings
+Insgesamt konnte mit der entwickelten Applikation ein funktionsfähiger Prototyp realisiert werden, der die wichtigsten Anforderungen der Aufgabenstellung erfüllt. Die Anwendung zeigt, wie projektbezogene Informationen strukturiert erfasst, kommentiert und über Tags wiedergefunden werden können.
+Persönlich habe ich während dieser Projektarbeit besonders beim Ausarbeiten und Programmieren des Prototyps viel gelernt. Gerade in Momenten, in denen das Umsetzen von Logik, Methoden und UI erfolgreich war, hat mir die praktische Umsetzung der Anwendung Freude bereitet. Dadurch wurde für mich deutlich, dass mir die technische Umsetzung einer solchen Softwarelösung grundsätzlich Spass machen kann, ich in diesem Bereich aber noch sehr viel zu lernen habe.
+Verzeichnisse
+Quellenverzeichnis und Tools
+OpenAI – ChatGPThttps://chat.openai.com
+Microsoft – .NET Documentationhttps://learn.microsoft.com
+Stack Overflowhttps://stackoverflow.com/questions
+SQLitehttps://sqlite.org
+DB Browser for SQLite
+https://sqlitebrowser.org/
+Miro Boardhttps://miro.com/de/
+Mermaid.ai
+https://mermaid.js.org/
+Github
+https://github.com/
+Abbildungsverzeichnis
+Abbildung 1: Context Map9
+Abbildung 2: Anforderungsanalyse - Funktionale Anforderungen10
+Abbildung 3: Anforderungsanalyse - Nicht funktionale Anforderungen11
+Abbildung 4: Testplan14
+Abbildung 5: UML - Use Case16
+Abbildung 6: UML - Sequenzdiagramm17
+Abbildung 7: UML - State Machine18
+Abbildung 8: UML - Klassendiagramm19
+Abbildung 9: C4 - Architekturmodell22
+Abbildung 10: DB Browser (SQLite Cipher)24
+Abbildung 11: LoginForm24
+Abbildung 12: ProjectsForm25
+Abbildung 13: ProjectCreateForm26
+Abbildung 14: ProjectDetailsForm26
+Abbildung 15: InformationCreateForm27
+Abbildung 16: InformationEditForm27
+Tabellenverzeichnis
+Tabelle 1: Smart Ziele8
+Tabelle 2: User Stories11
+Tabelle 3: Klassen und Bedeutung20
+Tabelle 4: Planung29
+Tabelle 5: Erkenntnisse aus dem Controlling30

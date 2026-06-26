@@ -1,0 +1,46 @@
+@model ProjectDetailsViewModel
+@{
+    ViewData["Title"] = Model.Project.Name;
+}
+
+<a class="back-link" asp-action="Index">← Alle Projekte</a>
+<section class="project-hero">
+    <div>
+        <div class="eyebrow">@Model.Project.CustomerName</div>
+        <h1>@Model.Project.Name</h1>
+        <p>@(string.IsNullOrWhiteSpace(Model.Project.InitialDescription) ? "Für dieses Projekt wurde noch keine Beschreibung erfasst." : Model.Project.InitialDescription)</p>
+        <div class="project-facts"><span>Projektleitung: <strong>@Model.Project.ProjectLeadUser?.DisplayName</strong></span><span>Erstellt: @Model.Project.CreatedAt.ToLocalTime().ToString("dd.MM.yyyy")</span></div>
+    </div>
+    <a class="button button-primary" asp-controller="Information" asp-action="Create" asp-route-projectId="@Model.Project.Id"><span class="button-symbol">+</span> Information hinzufügen</a>
+</section>
+
+<section class="information-section">
+    <div class="section-heading"><div><h2>Informationen</h2><p>@Model.Informations.Count @(Model.Informations.Count == 1 ? "Eintrag" : "Einträge")@if (!string.IsNullOrWhiteSpace(Model.ActiveTag)) { <text> mit Tag „@Model.ActiveTag“</text> }</p></div></div>
+    @if (Model.AvailableTags.Count > 0)
+    {
+        <nav class="tag-filter" aria-label="Informationen nach Tags filtern">
+            <a class="tag-chip @(string.IsNullOrWhiteSpace(Model.ActiveTag) ? "active" : "")" asp-route-id="@Model.Project.Id">Alle</a>
+            @foreach (var tag in Model.AvailableTags)
+            {
+                <a class="tag-chip @(Model.ActiveTag == tag ? "active" : "")" asp-route-id="@Model.Project.Id" asp-route-tag="@tag">@tag</a>
+            }
+        </nav>
+    }
+
+    @if (Model.Informations.Count == 0)
+    {
+        <div class="empty-state compact-empty"><div class="empty-symbol">✦</div><h2>Noch keine Informationen</h2><p>Halte Notizen, Anforderungen oder Entscheidungen direkt hier fest.</p></div>
+    }
+    else
+    {
+        <div class="information-list">
+            @foreach (var information in Model.Informations)
+            {
+                <article class="information-card">
+                    <div class="information-card-content"><p>@information.Text</p><div class="tag-row">@foreach (var tag in information.Tags) { <span class="tag-chip static">@tag</span> }</div></div>
+                    <footer><span>@(information.UpdatedAt is not null ? $"Aktualisiert {information.UpdatedAt.Value.ToLocalTime():dd.MM.yyyy HH:mm}" : $"Erfasst {information.CreatedAt.ToLocalTime():dd.MM.yyyy HH:mm}")</span><span>▢ @information.CommentCount&nbsp;&nbsp;↗ @information.LinkCount</span><a asp-controller="Information" asp-action="Edit" asp-route-id="@information.Id">Öffnen →</a></footer>
+                </article>
+            }
+        </div>
+    }
+</section>

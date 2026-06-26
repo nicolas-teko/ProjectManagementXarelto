@@ -1,0 +1,42 @@
+@using ProjectManagementXarelto.Core.Models
+@model InformationEditViewModel
+@{
+    ViewData["Title"] = "Information bearbeiten";
+    var information = Model.Information;
+}
+
+<a class="back-link" asp-controller="Projects" asp-action="Details" asp-route-id="@information.ProjectId">← Zurück zu @information.Project?.Name</a>
+<div class="page-heading compact-heading"><div><div class="eyebrow">Information</div><h1>Eintrag bearbeiten.</h1><p>Erstellt am @information.CreatedAt.ToLocalTime().ToString("dd.MM.yyyy, HH:mm")@(information.UpdatedAt is not null ? $" · zuletzt geändert {information.UpdatedAt.Value.ToLocalTime():dd.MM.yyyy, HH:mm}" : "")</p></div></div>
+
+<div class="editor-layout">
+    <section class="surface editor-main">
+        <form asp-action="Edit" asp-route-id="@information.Id" method="post">
+            <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+            <div class="field"><label asp-for="Form.Text"></label><textarea asp-for="Form.Text" rows="11"></textarea><span asp-validation-for="Form.Text"></span></div>
+            <div class="form-actions"><a class="button button-secondary" asp-controller="Projects" asp-action="Details" asp-route-id="@information.ProjectId">Fertig</a><button class="button button-primary" type="submit">Änderungen speichern</button></div>
+        </form>
+    </section>
+
+    <aside class="editor-side">
+        <section class="surface side-section">
+            <h2>Tags</h2><p class="helper-text">Bis zu drei Schlagwörter pro Information.</p>
+            <div class="tag-row editable-tags">@foreach (var tag in information.Tags.OrderBy(t => t.Tag)) { <form asp-action="RemoveTag" method="post"><input type="hidden" name="id" value="@tag.Id" /><button class="tag-chip removable" title="Tag entfernen">@tag.Tag <span>×</span></button></form> }</div>
+            <form asp-action="AddTag" method="post" class="inline-form"><input type="hidden" name="informationId" value="@information.Id" /><input name="tag" maxlength="100" placeholder="Tag hinzufügen" /><button class="icon-button" type="submit" aria-label="Tag hinzufügen">+</button></form>
+        </section>
+
+        <section class="surface side-section">
+            <h2>Links &amp; Dokumente</h2>
+            @if (information.Links.Count == 0) { <p class="helper-text">Noch keine Links hinterlegt.</p> }
+            else { <ul class="link-list">@foreach (var link in information.Links.OrderBy(l => l.Type).ThenBy(l => l.Url)) { <li><span class="link-type">@(link.Type == LinkType.Image ? "Bild" : "Dokument")</span><a href="@link.Url" target="_blank" rel="noopener noreferrer">@link.Url</a><form asp-action="RemoveLink" method="post"><input type="hidden" name="id" value="@link.Id" /><button class="mini-remove" aria-label="Link entfernen">×</button></form></li> }</ul> }
+            <form asp-action="AddLink" method="post" class="stacked-inline-form"><input type="hidden" name="informationId" value="@information.Id" /><div><select name="type"><option value="Image">Bild</option><option value="Document">Dokument</option></select><input name="url" placeholder="https://…" /></div><button class="button button-secondary small-button" type="submit">Link hinzufügen</button></form>
+        </section>
+
+        <section class="surface side-section">
+            <h2>Kommentare</h2>
+            <div class="comment-list">@if (information.Comments.Count == 0) { <p class="helper-text">Noch keine Kommentare.</p> } @foreach (var comment in information.Comments.OrderByDescending(c => c.CreatedAt)) { <article class="comment"><p>@comment.Text</p><span>@comment.CreatedAt.ToLocalTime().ToString("dd.MM.yyyy, HH:mm")</span></article> }</div>
+            <form asp-action="AddComment" method="post" class="comment-form"><input type="hidden" name="informationId" value="@information.Id" /><textarea name="text" rows="3" placeholder="Kommentar schreiben …"></textarea><button class="button button-secondary small-button" type="submit">Kommentar hinzufügen</button></form>
+        </section>
+    </aside>
+</div>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

@@ -1,0 +1,43 @@
+@model ProjectsIndexViewModel
+@{
+    ViewData["Title"] = "Projekte";
+}
+
+<div class="page-heading">
+    <div>
+        <div class="eyebrow">Übersicht</div>
+        <h1>Guten Tag, @Model.UserName.</h1>
+        <p>Wähle ein Projekt aus oder beginne etwas Neues.</p>
+    </div>
+    @if (Model.CanCreateProjects)
+    {
+        <a class="button button-primary" asp-action="Create"><span class="button-symbol">+</span> Neues Projekt</a>
+    }
+</div>
+
+@if (Model.Projects.Count == 0)
+{
+    <section class="empty-state">
+        <div class="empty-symbol">□</div>
+        <h2>Noch keine Projekte</h2>
+        <p>Lege dein erstes Projekt an, damit du Informationen strukturiert erfassen kannst.</p>
+        @if (Model.CanCreateProjects)
+        {
+            <a class="button button-primary" asp-action="Create">Erstes Projekt anlegen</a>
+        }
+    </section>
+}
+else
+{
+    <section class="project-grid" aria-label="Projektliste">
+        @foreach (var project in Model.Projects)
+        {
+            <a class="project-card" asp-action="Details" asp-route-id="@project.Id">
+                <div class="project-card-top"><span class="customer-label">@project.CustomerName</span><span class="arrow">→</span></div>
+                <h2>@project.Name</h2>
+                <div class="project-card-meta"><span>@project.InformationCount @(project.InformationCount == 1 ? "Information" : "Informationen")</span><span>Leitung: @project.ProjectLeadName</span></div>
+                <div class="project-card-date">Erstellt am @project.CreatedAt.ToLocalTime().ToString("dd.MM.yyyy")</div>
+            </a>
+        }
+    </section>
+}
