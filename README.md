@@ -1,7 +1,19 @@
 # ProjectManagementXarelto
 
-Eine einfache Windows-Desktopanwendung zur Verwaltung von Projekten, Informationen, Tags, URLs und Kommentaren.  
-Die Anwendung wurde mit **C# (.NET 8)** und **WinForms** entwickelt und nutzt **SQLite** als lokale Datenbank.
+Eine einfache Anwendung zur Verwaltung von Projekten, Informationen, Tags, URLs und Kommentaren.  
+Die Anwendung wurde mit **C# (.NET 8)** entwickelt und nutzt **SQLite** als lokale Datenbank.
+
+## Verfügbare Versionen
+
+- **Desktop-Version (WinForms)** - `master` Branch
+  - Windows-Desktopanwendung
+  - Entwickelt mit WinForms
+  - Entwicklung mit Visual Studio empfohlen
+
+- **Web-Version (ASP.NET Core MVC)** - `feature/web-frontend` Branch  
+  - Web-basierte Anwendung
+  - Moderne Browser-basierte UI
+  - Entwicklung in VS Code oder Visual Studio
 
 ---
 
@@ -22,10 +34,13 @@ Optional (für Datenbankanalyse):
 
 # Projektstruktur
 
-Die Anwendung ist in drei Projekte unterteilt:
+Die Anwendung ist in vier Projekte unterteilt:
 
 - **ProjectManagementXarelto.App**  
-  Enthält die Benutzeroberfläche (WinForms).
+  Enthält die WinForms Benutzeroberfläche (Desktop-Version).
+
+- **ProjectManagementXarelto.Web**  
+  Enthält die ASP.NET Core MVC Benutzeroberfläche (Web-Version).
 
 - **ProjectManagementXarelto.Core**  
   Enthält die Domänenmodelle und grundlegende Logik.
@@ -37,7 +52,22 @@ Die Anwendung ist in drei Projekte unterteilt:
 
 # Anwendung lokal starten
 
-1. Repository klonen oder herunterladen
+## Desktop-Version (WinForms)
 
 ```bash
-git clone <repository-url>
+git checkout master
+cd ProjectManagementXarelto
+dotnet build
+dotnet run --project ProjectManagementXarelto.App
+```
+
+## Web-Version (ASP.NET Core MVC)
+
+```bash
+git checkout feature/web-frontend
+cd ProjectManagementXarelto
+dotnet build
+dotnet run --project ProjectManagementXarelto.Web
+```
+
+Die Web-App ist dann unter `https://localhost:5001` erreichbar (oder wie in der Ausgabe angezeigt).
